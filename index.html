@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <audio id="ambient" loop>
   <source src="audio/background.flac" type="audio/mpeg" />
 </audio>
@@ -12,13 +15,21 @@
 </head>
 
 <body>
+    <div id="loadInScreen">
+       
+        <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
+<dotlottie-wc src="https://lottie.host/2513382b-0595-4ba2-ac97-c5b6900bc836/1qIcfCiOUr.lottie" style="width: 300px;height: 300px" autoplay loop></dotlottie-wc>
+</dotlottie-wc>
+  
+    </div>
     <div class="container">
         <div class="orbContainer">
             <div class="orb">
                 <div class="liquid"></div>
             </div>
         </div>
-        <input id="question" placeholder="Ask a question..." />
+        <h1 id="mainHeader">Consult the Orb</h1>
+        <input type="text" id="question" placeholder="Ask a question..." />
         <p id="answer"></p>
     </div>
     <script src="script.js"></script>

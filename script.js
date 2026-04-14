@@ -1,3 +1,5 @@
+
+
 const audio = document.getElementById("ambient");
 audio.volume = 0.08;
 
@@ -9,7 +11,11 @@ function enableAudio() {
 // MUST be click (not mousemove, not load)
 window.addEventListener("click", enableAudio);
 
+const loadScreen = document.getElementById("loadInScreen");
 
+window.addEventListener("click", () => {
+  loadScreen.classList.add("fade-out");
+});
 
 const orb = document.querySelector(".orb");
 
