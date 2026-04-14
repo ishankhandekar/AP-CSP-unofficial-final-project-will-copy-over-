@@ -1,0 +1,184 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    background-color: #070E22;
+    margin: 0;
+    padding: 0;
+}
+.orbContainer{
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.orb {
+  height: 25rem;
+  width: 25rem;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+    --fill: 0%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+
+ box-shadow:
+  0 0 20px rgba(59, 130, 246, 0.35),
+  0 0 50px rgba(59, 130, 246, 0.25),
+  0 0 100px rgba(59, 130, 246, 0.18),
+  0 0 180px rgba(59, 130, 246, 0.12),
+  0 0 260px rgba(59, 130, 246, 0.08),
+  0 0 340px rgba(59, 130, 246, 0.05),
+  inset -10px -10px 30px rgba(0, 0, 0, 0.25),
+  inset 10px 10px 20px rgba(255, 255, 255, 0.08);
+  animation: glowFlicker 3.5s infinite ease-in-out;
+
+}
+
+@keyframes glowFlicker {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(59, 130, 246, 0.30),
+      0 0 60px rgba(59, 130, 246, 0.22),
+      0 0 120px rgba(59, 130, 246, 0.15),
+      0 0 200px rgba(59, 130, 246, 0.10),
+      0 0 300px rgba(59, 130, 246, 0.06),
+      inset -10px -10px 30px rgba(0, 0, 0, 0.25),
+      inset 10px 10px 20px rgba(255, 255, 255, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      0 0 25px rgba(59, 130, 246, 0.38),
+      0 0 80px rgba(59, 130, 246, 0.28),
+      0 0 140px rgba(59, 130, 246, 0.18),
+      0 0 240px rgba(59, 130, 246, 0.12),
+      0 0 360px rgba(59, 130, 246, 0.07),
+      inset -10px -10px 30px rgba(0, 0, 0, 0.25),
+      inset 10px 10px 20px rgba(255, 255, 255, 0.08);
+  }
+}
+
+
+.orb::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(59, 130, 246, 0.35),
+    rgba(99, 102, 241, 0.15),
+    transparent 60%
+  );
+
+  filter: blur(25px);
+  animation: drift 8s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  0% {
+    transform: translate(-10%, -5%) scale(1.1);
+  }
+  50% {
+    transform: translate(10%, 8%) scale(1.15);
+  }
+  100% {
+    transform: translate(-6%, 12%) scale(1.1);
+  }
+}
+.orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at 70% 60%,
+    rgba(147, 197, 253, 0.25),
+    transparent 55%
+  );
+
+  mix-blend-mode: screen;
+  filter: blur(20px);
+  animation: drift2 10s ease-in-out infinite alternate;
+}
+@keyframes drift2 {
+  0%   { transform: translate(8%, -6%); }
+  100% { transform: translate(-8%, 10%); }
+}
+
+
+
+
+
+/* =========================
+   LIQUID (FILL SYSTEM)
+========================= */
+.liquid {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  /* IMPORTANT: height drives fill */
+  height: var(--fill, 0%);
+  min-height: 10px;
+
+  background: radial-gradient(
+  circle at 30% 80%,
+  rgba(168, 85, 247, 0.12),
+  rgba(139, 92, 246, 0.35),
+  rgba(124, 58, 237, 0.60)
+);
+
+  filter: blur(10px);
+
+  transition: height 0.25s ease-out;
+
+  will-change: height;
+}
+
+/* =========================
+   ENERGY GLOW INSIDE LIQUID
+========================= */
+.liquid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 140, 0, 0.35),
+    transparent 65%
+  );
+
+  mix-blend-mode: screen;
+  filter: blur(18px);
+  opacity: 0.7;
+}
+
+/* =========================
+   OPTIONAL: HIGH ENERGY MODE
+========================= */
+.orb.high-energy .liquid::after {
+  animation: liquidPulse 1.8s ease-in-out infinite;
+  opacity: 1;
+}
+
+@keyframes liquidPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }}
+
+  .orb:hover .liquid {
+  filter: blur(8px) saturate(1.2);
+}
