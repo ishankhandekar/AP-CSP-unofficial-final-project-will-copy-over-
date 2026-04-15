@@ -1,15 +1,30 @@
 
+window.addEventListener("load", () => {
+  const container = document.getElementById("pageLoadContainer");
+  container.classList.add("show");
+});
 
 const audio = document.getElementById("ambient");
-audio.volume = 0.08;
 
-function enableAudio() {
-  audio.play().catch(() => {});
-  window.removeEventListener("click", enableAudio);
+audio.loop = true;
+audio.volume = 0.05;
+
+let started = false;
+
+async function startAudio() {
+  if (started) return;
+  started = true;
+
+  try {
+    audio.currentTime = 0;
+    await audio.play();
+  } catch (e) {
+    started = false; // allow retry if it failed
+    console.log("Audio failed:", e);
+  }
 }
 
-// MUST be click (not mousemove, not load)
-window.addEventListener("click", enableAudio);
+window.addEventListener("click", startAudio, { once: true });
 
 const loadScreen = document.getElementById("loadInScreen");
 
